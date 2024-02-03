@@ -12,7 +12,14 @@ import (
 )
 
 func main() {
-	f, err := os.Open("test.txt")
+	if len(os.Args) != 2 {
+		fmt.Println("Usage: go run main.go data.txt")
+		os.Exit(1)
+	}
+
+	fileName := os.Args[1]
+
+	f, err := os.Open(fileName)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +44,10 @@ func main() {
 		log.Fatalf("error scanning file: %v", err)
 	}
 
-	fmt.Printf("data sample size: %v\n", len(xs))
+	if len(xs) == 0 {
+		fmt.Println("Error: Empty slice. Please provide a file with numeric values.")
+		return
+	}
 
 	mean := stat.Mean(xs, nil)
 	variance := stat.Variance(xs, nil)
@@ -46,8 +56,8 @@ func main() {
 	sort.Float64s(xs)
 	median := stat.Quantile(0.5, stat.Empirical, xs, nil)
 
-	fmt.Printf("mean=     %v\n", mean)
-	fmt.Printf("median=   %v\n", median)
-	fmt.Printf("variance= %v\n", variance)
-	fmt.Printf("std-dev=  %v\n", stddev)
+	fmt.Printf("Average: %.0f\n", mean)
+	fmt.Printf("Median: %.0f\n", median)
+	fmt.Printf("Variance: %.0f\n", variance)
+	fmt.Printf("Standard Deviation: %.0f\n", stddev)
 }
