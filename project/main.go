@@ -25,39 +25,47 @@ func main() {
 	}
 	defer f.Close()
 
-	var xs []float64
+	xs := make([]float64, 0)
 	scan := bufio.NewScanner(f)
 	for scan.Scan() {
 		var v float64
 		txt := scan.Text()
-		_, err = fmt.Sscanf(txt, "%f", &v)
-		if err != nil {
-			log.Fatalf(
-				"could not convert to float64 %q: %v",
-				txt, err,
-			)
+		if _, err = fmt.Sscanf(txt, "%f", &v); err != nil {
+			log.Printf("Warning: could not convert %q to float64: %v\n", txt, err)
+			continue
 		}
 		xs = append(xs, v)
 	}
 
 	if err = scan.Err(); err != nil {
-		log.Fatalf("error scanning file: %v", err)
+		log.Fatalf("Error scanning file: %v", err)
 	}
 
 	if len(xs) == 0 {
-		fmt.Println("Error: Empty slice. Please provide a file with numeric values.")
+		fmt.Println("Error: No valid numeric values provided in the file.")
 		return
 	}
 
-	mean := stat.Mean(xs, nil)
-	variance := stat.Variance(xs, nil)
+	mean := calculateMean(xs)
+	variance := calculateVariance(xs, mean)
 	stddev := math.Sqrt(variance)
-
-	sort.Float64s(xs)
-	median := stat.Quantile(0.5, stat.Empirical, xs, nil)
+	median := calculateMedian(xs)
 
 	fmt.Printf("Average: %.0f\n", mean)
 	fmt.Printf("Median: %.0f\n", median)
 	fmt.Printf("Variance: %.0f\n", variance)
 	fmt.Printf("Standard Deviation: %.0f\n", stddev)
+}
+
+func calculateMean(xs []float64) float64 {
+	return stat.Mean(xs, nil)
+}
+
+func calculateVariance(xs []float64, mean float64) float64 {
+	return stat.Variance(xs, nil)
+}
+
+func calculateMedian(xs []float64) float64 {
+	sort.Float64s(xs)
+	return stat.Quantile(0.5, stat.Empirical, xs, nil)
 }
