@@ -18,27 +18,9 @@ func main() {
 	}
 
 	fileName := os.Args[1]
-
-	f, err := os.Open(fileName)
+	xs, err := readDataFromFile(fileName)
 	if err != nil {
 		log.Fatal(err)
-	}
-	defer f.Close()
-
-	xs := make([]float64, 0)
-	scan := bufio.NewScanner(f)
-	for scan.Scan() {
-		var v float64
-		txt := scan.Text()
-		if _, err = fmt.Sscanf(txt, "%f", &v); err != nil {
-			log.Printf("Warning: could not convert %q to float64: %v\n", txt, err)
-			continue
-		}
-		xs = append(xs, v)
-	}
-
-	if err = scan.Err(); err != nil {
-		log.Fatalf("Error scanning file: %v", err)
 	}
 
 	if len(xs) == 0 {
@@ -55,6 +37,32 @@ func main() {
 	fmt.Printf("Median: %.0f\n", median)
 	fmt.Printf("Variance: %.0f\n", variance)
 	fmt.Printf("Standard Deviation: %.0f\n", stddev)
+}
+
+func readDataFromFile(fileName string) ([]float64, error) {
+	f, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	var xs []float64
+	scan := bufio.NewScanner(f)
+	for scan.Scan() {
+		var v float64
+		txt := scan.Text()
+		if _, err = fmt.Sscanf(txt, "%f", &v); err != nil {
+			log.Printf("Warning: could not convert %q to float64: %v\n", txt, err)
+			continue
+		}
+		xs = append(xs, v)
+	}
+
+	if err = scan.Err(); err != nil {
+		return nil, err
+	}
+
+	return xs, nil
 }
 
 func calculateMean(xs []float64) float64 {
