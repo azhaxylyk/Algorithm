@@ -2,51 +2,47 @@
 
 ## Objectives
 
-The purpose of this project is for you to calculate the following:
+The goal of this project is to perform the following calculations on a given dataset:
 
 - Average
 - Median
 - Variance
 - Standard Deviation
 
-## Instructions
+## Usage
 
-Your program must be able to read from a file and print the result of each statistic mentioned above. In other words, your program must be able to read the data present in the path passed as argument. The data in the file will be presented as the following example:
+First, clone the repository:
 ```bash
-189
-113
-121
-114
-145
-110
-...
+git clone git@git.01.alem.school:azhaxylyk/math-skills.git
 ```
 
-This data represents a statistical population: each line contains one value.
-
-To run your program a command similar to this one will be used if your project is made in Go:
+Navigate to the project directory:
 ```bash
-$> go run your-program.go data.txt
+cd math-skills/project
 ```
-After reading the file, your program must execute each of the calculations asked above and print the results in the following manner (the following numbers are only examples):
+
+In the project directory, you will find three files: data_large.txt, data_small.txt, and data_with_negative.txt.
+
+To execute the program with one of the datasets, run the following command:
 ```bash
-Average: 35
-Median: 4
-Variance: 5
-Standard Deviation: 65
+go run main.go data_large.txt
 ```
-Please note that the values are rounded integers.
+Replace data_large.txt with the dataset you want to analyze.
 
-## Testing
 
-Your program will be tested by an auditor who will run a program provided by us. This program creates a random data set of numbers and prints the result. The auditor job is to compare how your program performed.
+After reading the file, the program will execute each of the calculations mentioned above and print the results in the following format (rounded to the nearest integer):
+```bash
+Average: 5075
+Median: 4942
+Variance: 8039115
+Standard Deviation: 2835
+```
 
-You can choose the language in which you want to build your program.
 
-This project will help you learn about:
-
-- Statistics and Mathematics
-    - Average
-    - Median
-    - Variance
-    - Standard Deviation
+Please note that the values are rounded to the nearest integer by default. If you need to round to the smallest integer, you can uncomment the appropriate lines in the Go program:
+```bash
+fmt.Printf("Average: %.0f\n", math.Floor(mean))
+fmt.Printf("Median: %.0f\n", math.Floor(median))
+fmt.Printf("Variance: %.0f\n", math.Floor(variance))
+fmt.Printf("Standard Deviation: %.0f\n", math.Floor(stddev))
+```
