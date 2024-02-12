@@ -37,6 +37,13 @@ func main() {
 	fmt.Printf("Median: %.0f\n", median)
 	fmt.Printf("Variance: %.0f\n", variance)
 	fmt.Printf("Standard Deviation: %.0f\n", stddev)
+
+	// Uncomment the following lines to round to the smallest integer
+
+	// fmt.Printf("Average: %.0f\n", math.Floor(mean))
+	// fmt.Printf("Median: %.0f\n", math.Floor(median))
+	// fmt.Printf("Variance: %.0f\n", math.Floor(variance))
+	// fmt.Printf("Standard Deviation: %.0f\n", math.Floor(stddev))
 }
 
 func readDataFromFile(fileName string) ([]float64, error) {
