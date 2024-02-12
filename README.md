@@ -13,7 +13,7 @@ The goal of this project is to perform the following calculations on a given dat
 
 First, clone the repository:
 ```bash
-git clone git@git.01.alem.school:azhaxylyk/math-skills.git
+git clone git@github.com:azhaxylyk/math-skills.git
 ```
 
 Navigate to the project directory:
