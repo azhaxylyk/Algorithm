@@ -25,17 +25,17 @@ In the project directory, you will find three files: data_large.txt, data_small.
 
 To execute the program with one of the datasets, run the following command:
 ```bash
-go run main.go data_large.txt
+go run main.go small_range.txt
 ```
-Replace data_large.txt with the dataset you want to analyze.
+Replace small_range.txt with the dataset you want to analyze.
 
 
 After reading the file, the program will execute each of the calculations mentioned above and print the results in the following format (rounded to the nearest integer):
 ```bash
-Average: 5075
-Median: 4942
-Variance: 8039115
-Standard Deviation: 2835
+Average: 148
+Median: 141
+Variance: 853
+Standard Deviation: 29
 ```
 
 
