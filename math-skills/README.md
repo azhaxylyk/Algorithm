@@ -11,14 +11,9 @@ The goal of this project is to perform the following calculations on a given dat
 
 ## Usage
 
-First, clone the repository:
-```bash
-git clone git@github.com:azhaxylyk/math-skills.git
-```
-
 Navigate to the project directory:
 ```bash
-cd math-skills/project
+cd Algorithm/math-skills/project
 ```
 
 In the project directory, you will find three files: data_large.txt, data_small.txt, and data_with_negative.txt.
