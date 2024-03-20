@@ -1,15 +1,20 @@
-# guess-it
+# guess-it-1
 
 ## Usage
 
-You will first need copy the `student/` folder (provided by the student) in
-which you will see the student guessing program along with a file called
-`script.sh`. This file should be an executable shell script that runs the
-student program if you are in the root folder `guess-it/`. The filesystem
-should look somethings like this:
+### Cloning the Repository
+
+```bash
+git clone git@git.01.alem.school:azhaxylyk/guess-it-1.git
+```
+### Setting up the Environment
+
+Download [zip file](https://assets.01-edu.org/guess-it/guess-it-dockerized.zip) and extract it.
+
+Once you have the repository locally, navigate into the guess-it-dockerized/ directory. You will need to place the student/ folder (provided by the student) inside the root directory. This folder contains the student's guessing program along with a file named script.sh, which should be an executable shell script that runs the student's program. Your file system should resemble the following structure:
 
 ```console
-─ guess-it/
+─ guess-it-dockerized/
 ├── ai/
 │   ├── big-range
 │   └── ...
@@ -17,39 +22,37 @@ should look somethings like this:
 ├── index.js
 └── ...
 └── student/
-    ├── ...
+    ├── solution.py
     └── script.sh
 
 ```
 
-To test the student program, these commands should be ran to have the
-dependencies needed and to start the webpage on the port 3000:
+Before running the program, ensure that the script.sh file is executable. You can make it executable using the following command in your terminal:
 
 ```console
-docker compose up
+chmod +x student/script.sh
 ```
 
-After opening your browser of preference in the port
-[3000](http://localhost:3000/), if you try clicking on any of the `Test Data`
-buttons, you will notice that in the Dev Tool/ Console there is a message which
-tells you that you need another guesser besides the student.
+### Testing the Student Program
 
-Adding a guesser is simple. You need to add in the URL a guesser, in other
-words, the name of one of the files present in the `ai/` folder:
+1. Ensure you have Docker installed on your system.
+2. Run the following commands to set up the dependencies and start the webpage on port 3000:
 
 ```console
-?guesser=<name_of_guesser>
+docker-compose up
 ```
 
-For example:
+3. Open your preferred web browser and go to http://localhost:3000/.
+4. Click on any of the "Test Data" buttons. You will notice a message in the Dev Tools/Console indicating that you need another guesser besides the student.
+5. To add a guesser, append the guesser's name to the URL. The guesser's name should match one of the files present in the ai/ folder. For example
 
 ```console
-?guesser=big-range
+http://localhost:3000/?guesser=big-range
 ```
 
-After that, choose which of the random data set to test. After that you can
-wait for the program to test all of the values (boooooring), or you can click
-`Quick` to skip the waiting and be presented with the results.
+6. Choose which random data set to test. You can either wait for the program to test all values or click "Quick" to skip the waiting and see the results immediately.
+7. After each test, it's recommended to clear the displays by clicking the "Clean" button.
 
-Since the website uses big data sets, we advise you to clear the displays
-clicking on the `Clean` button after each test.
+### Additional Notes
+- The website utilizes large data sets, so it's advisable to clear the displays after each test for better performance.
+- [Audit](https://github.com/01-edu/public/tree/master/subjects/guess-it-1/audit)
